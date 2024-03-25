@@ -12,6 +12,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("Users").HasKey(u => u.Id);
 
         builder.Property(u => u.Id).HasColumnName("Id").IsRequired();
+        builder.Property(u => u.UserName).HasColumnName("UserName").IsRequired();
+        builder.Property(u => u.FirstName).HasColumnName("FirstName").IsRequired();
+        builder.Property(u => u.LastName).HasColumnName("LastName").IsRequired();
+        builder.Property(u => u.DateOfBirth).HasColumnName("DateOfBirth");
+        builder.Property(u => u.NationalIdentity).HasColumnName("NationalIdentity").IsRequired();
         builder.Property(u => u.Email).HasColumnName("Email").IsRequired();
         builder.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt").IsRequired();
         builder.Property(u => u.PasswordHash).HasColumnName("PasswordHash").IsRequired();
@@ -38,7 +43,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         get
         {
             HashingHelper.CreatePasswordHash(
-                password: "Passw0rd!",
+                password: "Pass!",
                 passwordHash: out byte[] passwordHash,
                 passwordSalt: out byte[] passwordSalt
             );
@@ -46,7 +51,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 new()
                 {
                     Id = AdminId,
-                    Email = "narch@kodlama.io",
+                    UserName = "admin",
+                    FirstName = "Eren",
+                    LastName = "Yuksek",
+                    NationalIdentity = "11223344",
+                    DateOfBirth = DateTime.Now,
+                    Email = "erenyksek@gmail.com",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt
                 };
