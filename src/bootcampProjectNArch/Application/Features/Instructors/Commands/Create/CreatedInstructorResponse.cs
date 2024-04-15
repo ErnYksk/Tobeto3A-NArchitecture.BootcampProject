@@ -6,6 +6,4 @@ public class CreatedInstructorResponse : IResponse
 {
     public Guid Id { get; set; }
     public string CompanyName { get; set; }
-
-
 }
